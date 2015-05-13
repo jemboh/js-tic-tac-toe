@@ -29,7 +29,7 @@ function removeEventListenerFrom(element) {
 
 function removeAllEventListeners() {
   var squares = document.getElementsByClassName('square');
-  
+
   for (var i = squares.length - 1; i >= 0; i--) {
     squares[i].removeEventListener('click', markSquare);
   }
@@ -37,7 +37,9 @@ function removeAllEventListeners() {
 
 function markSquare(e) {
   var player = currentPlayer();
-  e.currentTarget.innerHTML = player;
+  // debugger;
+  player === 'x' ? e.currentTarget.innerHTML = '<i class="fa fa-times fa-5x"></i>' : e.currentTarget.innerHTML = '<i class="fa fa-circle-o fa-5x"></i>'
+  e.currentTarget.classList.add(player + '-move');
   var position = e.currentTarget.dataset.position;
   board[position] = player;
   addPlayerMove(player, position);

@@ -6,7 +6,8 @@ html {
   box-sizing: inherit;
 }
 
-.container {
+body {
+  background-color: #ecf0f1;
 }
 
 #header {
@@ -23,11 +24,27 @@ html {
 .square {
   width: 30%;
   height: 30%;
-  margin: 1%;
+  margin: 5px;
   padding: 0;
-  display: inline-block;
   text-align: center;
   line-height: 575%;
-  background-color: #008FFF;
+  background-color: #7f8c8d;
   border-radius: 10px;
+  vertical-align: top;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square i {
+  color: #ecf0f1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.x-move {
+  background-color: #3498db;
+}
+
+.o-move {
+  background-color: #e74c3c;
 }
