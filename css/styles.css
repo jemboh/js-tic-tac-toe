@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
 }
 
 *, *:before, *:after {
@@ -11,8 +12,10 @@ body {
 }
 
 #header {
-  margin: 1px 0;
   text-align: center;
+  text-transform: uppercase;
+  font-weight: 100;
+  letter-spacing: 3px;
 }
 
 #grid-container {
@@ -47,4 +50,13 @@ body {
 
 .o-move {
   background-color: #e74c3c;
+}
+
+#game-options {
+  display: flex;
+}
+
+#reset-game {
+  margin: auto;
+  cursor: pointer;
 }
