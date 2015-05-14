@@ -1,6 +1,6 @@
 window.onload = init;
 
-var board = Array.apply(null, Array(9)).map(function (x, i) { return i; });
+var board;
 var rows = [[0,1,2], [3,4,5], [6,7,8]];
 var columns = [[0,3,6], [1,4,7], [2,5,8]];
 var diagonals = [[0,4,8], [2,4,6]];
@@ -13,6 +13,7 @@ var oMoves = [];
 
 function init() {
   addEventListeners();
+  board = Array.apply(null, Array(9)).map(function (x, i) { return i; });
 }
 
 function addEventListeners() {
@@ -20,7 +21,11 @@ function addEventListeners() {
 
   for (var i = squares.length - 1; i >= 0; i--) {
     squares[i].addEventListener('click', markSquare);
+    squares[i].addEventListener('mouseenter', highlightSquare);
+    squares[i].addEventListener('mouseleave', highlightSquare);
   }
+
+  document.getElementById('reset-game').addEventListener('click', resetGame);
 }
 
 function removeEventListenerFrom(element) {
@@ -32,18 +37,30 @@ function removeAllEventListeners() {
 
   for (var i = squares.length - 1; i >= 0; i--) {
     squares[i].removeEventListener('click', markSquare);
+    squares[i].removeEventListener('mouseenter', highlightSquare);
+    squares[i].removeEventListener('mouseleave', highlightSquare);
+  }
+}
+
+function highlightSquare(e) {
+  var element = e.currentTarget;
+  if(element.classList.length === 1) {
+    element.classList.add('highlight');
+  } else {
+    element.className = element.className.replace('highlight', '');
   }
 }
 
 function markSquare(e) {
+  var element = e.currentTarget;
   var player = currentPlayer();
-  // debugger;
-  player === 'x' ? e.currentTarget.innerHTML = '<i class="fa fa-times fa-5x"></i>' : e.currentTarget.innerHTML = '<i class="fa fa-circle-o fa-5x"></i>'
-  e.currentTarget.classList.add(player + '-move');
-  var position = e.currentTarget.dataset.position;
+  element.className = element.className.replace('highlight', '');
+  element.classList.add(player + '-move');
+  player === 'x' ? element.innerHTML = '<i class="fa fa-times fa-5x"></i>' : element.innerHTML = '<i class="fa fa-circle-o fa-5x"></i>'
+  var position = element.dataset.position;
   board[position] = player;
   addPlayerMove(player, position);
-  removeEventListenerFrom(e.currentTarget);
+  removeEventListenerFrom(element);
   lastPlayer = player;
   if (xMoves.length + oMoves.length === board.length && !winner) {
     alert('draw!')
@@ -59,7 +76,6 @@ function addPlayerMove(player, position) {
     checkForWinningCombination(oMoves, player);
   }
 }
-
 
 function currentPlayer(e) {
   return lastPlayer === 'x' ? 'o' : 'x';
@@ -79,4 +95,22 @@ function checkForWinningCombination(movesArray, player) {
       }
     }
   }
+}
+
+function clearBoard() {
+  var squares = document.getElementsByClassName('square');
+
+  for (var i = squares.length - 1; i >= 0; i--) {
+    squares[i].innerHTML = '';
+    squares[i].className = squares[i].className.replace(new RegExp(/[a-z].move$/), '');
+  }
+
+}
+
+function resetGame() {
+  clearBoard();
+  init();
+  lastPlayer = undefined;
+  xMoves = [];
+  oMoves = [];
 }
