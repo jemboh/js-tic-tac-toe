@@ -25,27 +25,30 @@ body {
 }
 
 .square {
-  width: 30%;
-  height: 30%;
+  width: 30.9%;
+  height: 30.9%;
   margin: 5px;
-  padding: 0;
-  text-align: center;
-  line-height: 575%;
-  /*background-color: #7f8c8d;*/
   border-radius: 10px;
   vertical-align: top;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color:#556;
+  /*background-color:#556;
   background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
   linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
   linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
   linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
   linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),
-  linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+  linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);*/
   background-size:80px 140px;
   background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  background-color:#727F7F;
+  background-image: linear-gradient(30deg, #393F40 12%, transparent 12.5%, transparent 87%, #393F40 87.5%, #393F40),
+  linear-gradient(150deg, #393F40 12%, transparent 12.5%, transparent 87%, #393F40 87.5%, #393F40),
+  linear-gradient(30deg, #393F40 12%, transparent 12.5%, transparent 87%, #393F40 87.5%, #393F40),
+  linear-gradient(150deg, #393F40 12%, transparent 12.5%, transparent 87%, #393F40 87.5%, #393F40),
+  linear-gradient(60deg, #ACBEBF 25%, transparent 25.5%, transparent 75%, #ACBEBF 75%, #ACBEBF),
+  linear-gradient(60deg, #ACBEBF 25%, transparent 25.5%, transparent 75%, #ACBEBF 75%, #ACBEBF);
 }
 
 .square i {
@@ -62,7 +65,8 @@ body {
 }
 
 .highlight {
-  background-color: #e67e22;
+  /*background-color: #e67e22;*/
+  background-color: #2A2F30;
 }
 
 #game-options {
@@ -72,4 +76,42 @@ body {
 #reset-game {
   margin: auto;
   cursor: pointer;
+}
+
+.x-overlay {
+  background-color: rgba(52,152,219,.9);
+}
+
+.o-overlay {
+  background-color: rgba(231,76,60,.8);
+}
+
+#overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.overlay-message-container {
+  position: relative;
+  top: 25%;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(252, 252, 252);
+}
+
+.overlay-winner {
+  font-size: 5em;
+}
+
+.overlay-menu {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
