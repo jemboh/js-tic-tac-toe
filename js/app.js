@@ -63,7 +63,7 @@ function markSquare(e) {
   removeEventListenerFrom(element);
   lastPlayer = player;
   if (xMoves.length + oMoves.length === board.length && !winner) {
-    alert('draw!')
+    gameOver('draw');
   };
 }
 
@@ -91,10 +91,38 @@ function checkForWinningCombination(movesArray, player) {
       if(winCounter === 3) {
         winner = player;
         removeAllEventListeners();
+        gameOver('win', player);
         console.log(player + ' wins!');
       }
     }
   }
+}
+
+function gameOver(result, winner) {
+  var overlay = document.createElement('div');
+  overlay.id = 'overlay';
+  
+  var overlayMessageContainer = document.createElement('div');
+  overlayMessageContainer.classList.add('overlay-message-container');
+
+  var resetLink = document.createElement('p');
+  resetLink.id = 'overlay-reset-game';
+  resetLink.innerHTML = 'reset';
+
+  if(winner) {
+    overlay.classList.add(winner + '-overlay');
+    overlayMessageContainer.innerHTML = winner + ' wins!';
+  } else {
+    overlay.classList.add('draw-overlay');
+    overlayMessageContainer.innerHTML = "It's a draw!";
+  }
+  
+  document.body.appendChild(overlay);
+  overlay.appendChild(overlayMessageContainer);
+  overlayMessageContainer.appendChild(resetLink);
+
+  document.getElementById('overlay-reset-game').addEventListener('click', resetGame);
+
 }
 
 function clearBoard() {
@@ -104,10 +132,14 @@ function clearBoard() {
     squares[i].innerHTML = '';
     squares[i].className = squares[i].className.replace(new RegExp(/[a-z].move$/), '');
   }
-
 }
 
 function resetGame() {
+  var overlay = document.getElementById('overlay');
+  if(overlay) {
+    console.log(overlay)
+    overlay.parentNode.removeChild(overlay);
+  }
   clearBoard();
   init();
   lastPlayer = undefined;
