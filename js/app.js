@@ -101,7 +101,7 @@ function checkForWinningCombination(movesArray, player) {
 function gameOver(result, winner) {
   var overlay = document.createElement('div');
   overlay.id = 'overlay';
-  
+
   var overlayMessageContainer = document.createElement('div');
   overlayMessageContainer.classList.add('overlay-message-container');
 
@@ -116,13 +116,12 @@ function gameOver(result, winner) {
     overlay.classList.add('draw-overlay');
     overlayMessageContainer.innerHTML = "It's a draw!";
   }
-  
+
   document.body.appendChild(overlay);
   overlay.appendChild(overlayMessageContainer);
   overlayMessageContainer.appendChild(resetLink);
 
   document.getElementById('overlay-reset-game').addEventListener('click', resetGame);
-
 }
 
 function clearBoard() {
@@ -136,10 +135,7 @@ function clearBoard() {
 
 function resetGame() {
   var overlay = document.getElementById('overlay');
-  if(overlay) {
-    console.log(overlay)
-    overlay.parentNode.removeChild(overlay);
-  }
+  if(overlay) overlay.parentNode.removeChild(overlay);
   clearBoard();
   init();
   lastPlayer = undefined;
